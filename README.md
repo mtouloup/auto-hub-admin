@@ -103,6 +103,17 @@ yarn codegen
 yarn dev
 ```
 
+### Docker Compose
+
+You can also start Mercur using Docker. This requires **docker** and **docker-compose** installed.
+
+```bash
+# Build and start all services
+docker-compose up --build
+```
+
+The compose setup starts PostgreSQL and Redis containers alongside the backend. The backend is available on `http://localhost:9000`.
+
 &nbsp;
 
 ## Prerequisites

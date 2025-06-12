@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      STORE_CORS: http://localhost:3000
+      ADMIN_CORS: http://localhost:9000
+      VENDOR_CORS: http://localhost:5173
+      AUTH_CORS: http://localhost:9000,http://localhost:5173,http://localhost:3000
+      DATABASE_URL: postgres://mercur:mercur@postgres:5432/mercur
+      DB_NAME: mercur
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: supersecret
+      COOKIE_SECRET: supersecret
+      STRIPE_SECRET_API_KEY: supersecret
+      STRIPE_CONNECTED_ACCOUNTS_WEBHOOK_SECRET: supersecret
+      RESEND_API_KEY: supersecret
+      RESEND_FROM_EMAIL: onboarding@resend.dev
+      ALGOLIA_APP_ID: XXX
+      ALGOLIA_API_KEY: supersecret
+      TALK_JS_APP_ID: xxx
+      TALK_JS_SECRET_API_KEY: xxx
+    ports:
+      - '9000:9000'
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: mercur
+      POSTGRES_PASSWORD: mercur
+      POSTGRES_DB: mercur
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+volumes:
+  postgres-data:
+  redis-data:
