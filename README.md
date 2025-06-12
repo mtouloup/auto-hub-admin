@@ -112,7 +112,7 @@ You can also start Mercur using Docker. This requires **docker** and **docker-co
 docker-compose up --build
 ```
 
-The compose setup starts PostgreSQL and Redis containers alongside the backend. The backend is available on `http://localhost:9000`.
+The compose setup starts PostgreSQL for persistent storage and a Redis instance for caching and events alongside the backend. The backend is available on `http://localhost:9000`.
 
 &nbsp;
 
